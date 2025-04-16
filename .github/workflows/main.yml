@@ -1,0 +1,38 @@
+name: iBus-user
+on: workflow_dispatch
+permissions:
+  id-token: write
+  actions: read
+  contents: read
+jobs:
+
+  build-push-image-to-ecr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_PORT: ${{ vars.PORT }}
+          file_name: .env
+          fail_on_empty: false
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ vars.ROLE_ARN }}
+          aws-region: 'us-east-1'
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: App Build and Push
+        env: 
+          ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
+          ECR_REPOSITORY: ${{vars.ECR_REPOSITORY}}
+          IMAGE_TAG: ${{ vars.IMAGE_TAG }}
+        run: |
+            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+            docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
