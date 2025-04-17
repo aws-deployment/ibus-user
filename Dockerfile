@@ -16,8 +16,14 @@ COPY . .
 # Build the NestJS application
 RUN npm run build
 
+RUN npm install pm2 -g
+
+
 # Expose the application port
 EXPOSE 3000
 
 # Command to run the application
-CMD ["node", "dist/main"]
+#CMD ["node", "dist/main"]
+
+CMD ["pm2-runtime", "dist/main.js"]
+
