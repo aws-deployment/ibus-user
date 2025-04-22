@@ -64,6 +64,9 @@ jobs:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           cluster: ${{env.ECS_CLUSTER || 'ibus-services-cluster'}}
           wait-for-service-stability: true
+      - name: taskdef-output
+        run: |
+          echo ${{steps.task-def.outputs.}}
       - name: ECS Service
         uses: scribd/amazon-ecs-service-action@v1
         with:
