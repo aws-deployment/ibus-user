@@ -1,7 +1,7 @@
 {
     "containerDefinitions": [
         {
-            "name": "<service_name>",
+            "name": "<service_name>-ctr",
             "image": "<service_name>-services:main",
             "cpu": 0,
             "portMappings": [
