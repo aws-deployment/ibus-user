@@ -66,7 +66,7 @@ jobs:
           wait-for-service-stability: true
       - name: taskdef-output
         run: |
-          echo ${{steps.task-def.outputs}}
+          echo ${{toJson(steps.task-def.outputs)}}
       - name: ECS Service
         uses: scribd/amazon-ecs-service-action@v1
         with:
