@@ -1,8 +1,8 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:838525021275:task-definition/ibus-user:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:838525021275:task-definition/ibus-user:3",
     "containerDefinitions": [
         {
-            "name": "ibus-use",
+            "name": "ibus-user",
             "image": "ibus-services:main",
             "cpu": 0,
             "portMappings": [
