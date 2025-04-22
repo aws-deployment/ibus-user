@@ -73,7 +73,7 @@ jobs:
           spec: |
             {
               "taskDefinition": "${{ steps.task-def.outputs.task-definition-arn }}"
-              "serviceName":"${{${{ 'ibus-user-' }}${{env.ENV || 'development'}}${{'-svc'}}}}
+              "serviceName":${{ 'ibus-user-' }}${{env.ENV || 'development'}}${{'-svc'}}
             }
           force-new-deployment: false
           wait-until-deployment-complete: true
