@@ -60,6 +60,5 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: ${{ 'ibus-user-' }}${{env.ENV}}${{'-service'}}
           cluster: ${{'arn:aws:ecs:us-east-1:838525021275:cluster/ibus-services-cluster'}}
           wait-for-service-stability: true
