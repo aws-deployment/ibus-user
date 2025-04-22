@@ -9,7 +9,7 @@ jobs:
   build-push-image-to-ecr:
     runs-on: ubuntu-latest
     environment:
-          name: ${{ github.ref_name }}
+          name: ${{ github.ref_name || 'development' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -53,13 +53,13 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
         with:
           task-definition: task-definition.json
-          container-name: ${{ 'ibus-user-' }}${{env.ENV}}${{'-ctr'}}
+          container-name: ${{ 'ibus-user-' }}${{env.ENV || 'development'}}${{'-ctr'}}
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: ibus-user-service
-          cluster: ${{'ibus-services-cluster'}}
+          service:  ${{ 'ibus-user-' }}${{env.ENV}}${{'-svc'}}
+          cluster: ${{env.ECS_CLUSTER || 'ibus-services-cluster'}}
           wait-for-service-stability: true
