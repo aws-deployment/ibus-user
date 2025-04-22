@@ -62,18 +62,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ 'ibus-user-' }}${{env.ENV || 'development'}}${{'-svc'}}
           cluster: ${{env.ECS_CLUSTER || 'ibus-services-cluster'}}
           wait-for-service-stability: true
-      - name: taskdef-output
-        run: |
-          echo ${{toJson(steps.task-def.outputs)}}
-      - name: ECS Service
-        uses: scribd/amazon-ecs-service-action@v1
-        with:
-          spec: |
-            {
-              "taskDefinition": "${{ steps.task-def.outputs.task-definition-arn }}"
-              "serviceName":${{ 'ibus-user-' }}${{env.ENV || 'development'}}${{'-svc'}}
-            }
-          force-new-deployment: false
-          wait-until-deployment-complete: true
