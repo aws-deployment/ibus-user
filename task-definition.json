@@ -34,7 +34,7 @@
             "systemControls": []
         }
     ],
-    "family": "ibus-user",
+    "family": "ibus-user-new",
     "executionRoleArn": "arn:aws:iam::838525021275:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "revision": 1,
