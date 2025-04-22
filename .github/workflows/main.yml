@@ -11,6 +11,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Task
+        run: |
+          sed -i "s/<service_name>/$SERVICE_NAME/g" task-definition.json 
+          sed -i "s/<account_id>/$ACCOUNT_ID/g" task-definition.json 
+        env:
+          SERVICE_NAME: ${{ 'ibus-user-' }}${{env.ENV}}
+          ACCOUNT_ID: 838525021275
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
         with:
