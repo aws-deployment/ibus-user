@@ -34,7 +34,7 @@
             "systemControls": []
         }
     ],
-    "family": "ibus-user-new",
+    "family": "<service_name>-tdf",
     "executionRoleArn": "arn:aws:iam::<account_id>:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "revision": 1,
