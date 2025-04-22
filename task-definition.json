@@ -35,7 +35,7 @@
         }
     ],
     "family": "ibus-user-new",
-    "executionRoleArn": "arn:aws:iam::838525021275:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::<account_id>:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "revision": 1,
     "volumes": [],
@@ -76,8 +76,5 @@
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
-    },
-    "registeredAt": "2025-04-17T17:42:13.860Z",
-    "registeredBy": "arn:aws:iam::838525021275:root",
-    "tags": []
+    }
 }
