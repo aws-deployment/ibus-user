@@ -18,7 +18,7 @@ jobs:
           sed -i "s/<service_name>/$SERVICE_NAME/g" task-definition.json 
           sed -i "s/<account_id>/$ACCOUNT_ID/g" task-definition.json 
         env:
-          SERVICE_NAME: ${{ 'ibus-user-' }}${{env.ENV}}
+          SERVICE_NAME:  ${{ 'ibus-user-' }}${{env.ENV}}${{'-service'}}
           ACCOUNT_ID: 838525021275
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
