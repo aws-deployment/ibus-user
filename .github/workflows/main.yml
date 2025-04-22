@@ -20,7 +20,7 @@ jobs:
           sed -i "s/<account_id>/$ACCOUNT_ID/g" task-definition.json
           echo "CONTAINER_NAME=$CONTAINER_NAME" >> $GITHUB_OUTPUT
         env:
-          CONTAINER_NAME:  ${{ 'ibus-user-' }}${{env.ENV || 'development'}}${{'-ctr'}}
+          CONTAINER_NAME:  ${{ 'ibus-user-' }}${{env.ENV || 'development'}}
           ACCOUNT_ID: 838525021275
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
@@ -55,7 +55,7 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
         with:
           task-definition: task-definition.json
-          container-name: ${{steps.generate-cont-name.outputs.CONTAINER_NAME}}
+          container-name: ${{steps.generate-cont-name.outputs.CONTAINER_NAME}}${{'-ctr'}}
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
