@@ -35,7 +35,7 @@
         }
     ],
     "family": "ibus-user",
-    "executionRoleArn": "arn:aws:iam::<account_id>:role/ecsTaskExecutionRole",
+    "executionRoleArn": "ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "revision": 1,
     "volumes": [],
