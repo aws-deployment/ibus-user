@@ -60,5 +60,5 @@ jobs:
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: ${{ 'ibus-user-' }}${{env.ENV}}${{'-service'}}
-          cluster: ${{ env.ECS_CLUSTER }}
+          cluster: ${{'arn:aws:ecs:us-east-1:838525021275:cluster/ibus-services-cluster'}}
           wait-for-service-stability: true
