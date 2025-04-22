@@ -1,4 +1,4 @@
-name: iBus-user
+name: ${{github.action_repository}}
 on: workflow_dispatch
 permissions:
   id-token: write
