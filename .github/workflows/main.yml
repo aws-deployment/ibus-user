@@ -15,10 +15,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Task
         run: |
-          sed -i "s/<service_name>/$SERVICE_NAME/g" task-definition.json 
+          sed -i "s/<service_name>/$CONTAINER_NAME/g" task-definition.json 
           sed -i "s/<account_id>/$ACCOUNT_ID/g" task-definition.json 
         env:
-          SERVICE_NAME:  ${{ 'ibus-user-' }}${{env.ENV}}${{'-service'}}
+          CONTAINER_NAME:  ${{ 'ibus-user-' }}${{env.ENV}}${{'-ctr'}}
           ACCOUNT_ID: 838525021275
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
@@ -53,12 +53,12 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
         with:
           task-definition: task-definition.json
-          container-name: ${{ 'ibus-user-' }}${{env.ENV}}${{'-service'}}
+          container-name: ${{ 'ibus-user-' }}${{env.ENV}}${{'-ctr'}}
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          cluster: ${{'arn:aws:ecs:us-east-1:838525021275:cluster/ibus-services-cluster'}}
+          cluster: ${{'ibus-services-cluster'}}
           wait-for-service-stability: true
