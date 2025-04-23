@@ -1,4 +1,4 @@
-name: ibus-user
+name: deploy-service
 on: workflow_dispatch
 permissions:
   id-token: write
@@ -20,7 +20,7 @@ jobs:
           sed -i "s/<account_id>/$ACCOUNT_ID/g" task-definition.json
           echo "CONTAINER_NAME=$CONTAINER_NAME" >> $GITHUB_OUTPUT
         env:
-          CONTAINER_NAME:  ${{github.action_repository}}-${{env.ENV || 'development'}}
+          CONTAINER_NAME:  ${{'ibus-user'}}-${{env.ENV || 'development'}}
           ACCOUNT_ID: 838525021275
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
