@@ -1,5 +1,11 @@
 name: deploy-service
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - main
+      - development
+      - test
+      
 permissions:
   id-token: write
   actions: read
